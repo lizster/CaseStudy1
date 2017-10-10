@@ -1,0 +1,33 @@
+---
+title: "Brewery Information"
+author: "Lizzy Sterling and Andrew Walsh"
+date: "10/10/2017"
+output: html_document
+---
+##Introduction##
+#Read in the files containing the Beer and the Breweries
+```{r, echo=TRUE}
+beer <- read.csv("Beers.csv", header=TRUE)
+brew <- read.csv("Breweries.csv", header=TRUE)
+```
+#How many breweries are present in each state?
+```{r, echo=TRUE}
+#install.packages("dplyr")
+library(dplyr)
+count(brew, brew$State) #still need to figure out how to show all of the states and their counts, not just the 
+```
+#Merge beer data with the breweries data.
+```{r, echo=TRUE}
+names(beer)[5]<- "Brew_ID" #making the merged columns the same
+totalbeerinfo <- merge(beer, brew, by="Brew_ID")
+names(totalbeerinfo[2]) <- "BeerName" #changing this column to BeerName
+names(totalbeerinfo[8]) <- "BreweryName"#changing this coloumn to BreweryName
+head(totalbeerinfo, 6)
+tail(totalbeerinfo, 6)
+```
+#Report the number of NAs in each column
+```{r, echo=TRUE}
+for (i in 1:10){
+  print(paste(names(totalbeerinfo)[i],":", sum(is.na(totalbeerinfo[,i]))))}
+#the issue with this one is that they are all separated by quotes
+```
