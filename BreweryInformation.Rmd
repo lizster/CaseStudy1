@@ -1,6 +1,6 @@
 ---
 title: "Brewery Information"
-author: "Lizzy Sterling and Andrew Walsh"
+author: "Lizzy Sterling and Andrew Walch"
 date: "10/10/2017"
 output: html_document
 ---
