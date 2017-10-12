@@ -14,7 +14,7 @@ brew <- read.csv("Breweries.csv", header=TRUE)
 ```{r, echo=TRUE}
 #install.packages("dplyr")
 library(dplyr)
-count(brew, brew$State) #still need to figure out how to show all of the states and their counts, not just the 
+print(count(brew, brew$State)) #still need to figure out how to show all of the states and their counts, not just the 
 ```
 #Merge beer data with the breweries data.
 ```{r, echo=TRUE}
@@ -22,8 +22,8 @@ names(beer)[5]<- "Brew_ID" #making the merged columns the same
 totalbeerinfo <- merge(beer, brew, by="Brew_ID")
 names(totalbeerinfo[2]) <- "BeerName" #changing this column to BeerName
 names(totalbeerinfo[8]) <- "BreweryName"#changing this coloumn to BreweryName
-head(totalbeerinfo, 6)
-tail(totalbeerinfo, 6)
+print(head(totalbeerinfo, 6))
+print(tail(totalbeerinfo, 6))
 ```
 #Report the number of NAs in each column
 ```{r, echo=TRUE}
@@ -34,9 +34,9 @@ for (i in 1:10){
 #Compute the median alcohol content and international bitterness unit for each state.
 Median Alcohol Content (ABV)
 ```{r, echo=TRUE}
-tapply(totalbeerinfo$ABV, totalbeerinfo$State, FUN=median, na.rm=TRUE)
+print(tapply(totalbeerinfo$ABV, totalbeerinfo$State, FUN=median, na.rm=TRUE))
 ```
 Median International Bitterness Unit (IBU)
 ```{r, echo=TRUE}
-tapply(totalbeerinfo$IBU, totalbeerinfo$State, FUN=median, na.rm=TRUE)
+print(tapply(totalbeerinfo$IBU, totalbeerinfo$State, FUN=median, na.rm=TRUE))
 ```
