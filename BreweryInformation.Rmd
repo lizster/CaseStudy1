@@ -31,3 +31,12 @@ for (i in 1:10){
   print(paste(names(totalbeerinfo)[i],":", sum(is.na(totalbeerinfo[,i]))))}
 #the issue with this one is that they are all separated by quotes
 ```
+#Compute the median alcohol content and international bitterness unit for each state.
+Median Alcohol Content (ABV)
+```{r, echo=TRUE}
+tapply(totalbeerinfo$ABV, totalbeerinfo$State, FUN=median, na.rm=TRUE)
+```
+Median International Bitterness Unit (IBU)
+```{r, echo=TRUE}
+tapply(totalbeerinfo$IBU, totalbeerinfo$State, FUN=median, na.rm=TRUE)
+```
