@@ -31,6 +31,9 @@ beers <- read.csv("Beers.csv", header=TRUE)
 breweries <- read.csv("Breweries.csv", header=TRUE)
 ```
 ##Breweries by State
+By using the `count` function within the `dplyr` package, we are able to count the number of breweries found in each separate state.  
+The state with the most breweries is Colorado (CO) with 47 breweries  
+The states tied with the least breweries are Washington DC, North Dakota (ND), South Dakota (SD), and West Virginia (WV) with 1 brewery
 ```{r, echo=TRUE}
 count <- count(breweries, breweries$State, sort=FALSE)
 names(count)[1] <- "State"
