@@ -4,7 +4,7 @@ author: "Lizzy Sterling and Andrew Walch"
 date: "10/10/2017"
 output: html_document
 ---
-#Introduction
+#Introduction#  
 The purpose of this code is to take data regarding beer and breweries in the United States of America.  
 Within this code, you can find information such as:  
 * The number of breweries per state  
