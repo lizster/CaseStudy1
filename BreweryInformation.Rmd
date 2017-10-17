@@ -1,11 +1,13 @@
 ---
 title: "Brewery Information"
-author: "Lizzy Sterling and Andrew Walsh"
+author: "Lizzy Sterling and Andrew Walch"
 date: "10/10/2017"
 output: html_document
 ---
 ##Introduction##
-#Read in the files containing the Beer and the Breweries
+#Reading in the files containing the Beer and the Breweries data in order to conduct further analysis
+"beer" contains information regarding the beer data
+"brew" contains information regardin the breweries data
 ```{r, echo=TRUE}
 beer <- read.csv("Beers.csv", header=TRUE)
 brew <- read.csv("Breweries.csv", header=TRUE)
@@ -13,13 +15,13 @@ brew <- read.csv("Breweries.csv", header=TRUE)
 #How many breweries are present in each state?
 ```{r, echo=TRUE}
 #install.packages("dplyr")
-library(dplyr)
-count(brew, brew$State) #still need to figure out how to show all of the states and their counts, not just the 
+library(dplyr) #allows us to use the "count" function
+count(brew, brew$State)
 ```
 #Merge beer data with the breweries data.
 ```{r, echo=TRUE}
 names(beer)[5]<- "Brew_ID" #making the merged columns the same
-totalbeerinfo <- merge(beer, brew, by="Brew_ID")
+totalbeerinfo <- merge(beer, brew, by="Brew_ID") #brew ID is the only column that they have the same
 names(totalbeerinfo[2]) <- "BeerName" #changing this column to BeerName
 names(totalbeerinfo[8]) <- "BreweryName"#changing this coloumn to BreweryName
 head(totalbeerinfo, 6)
@@ -31,3 +33,15 @@ for (i in 1:10){
   print(paste(names(totalbeerinfo)[i],":", sum(is.na(totalbeerinfo[,i]))))}
 #the issue with this one is that they are all separated by quotes
 ```
+#Compute the median alcohol content and international bitterness unit for each state.
+Median Alcohol Content (ABV)
+```{r, echo=TRUE}
+tapply(totalbeerinfo$ABV, totalbeerinfo$State, FUN=median, na.rm=TRUE)
+```
+Median International Bitterness Unit (IBU)
+```{r, echo=TRUE}
+tapply(totalbeerinfo$IBU, totalbeerinfo$State, FUN=median, na.rm=TRUE)
+```
+#plot the data in a barchart to compare
+
+#Summary Statistics for the ABV variable
