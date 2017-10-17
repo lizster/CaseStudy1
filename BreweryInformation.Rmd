@@ -4,65 +4,94 @@ author: "Lizzy Sterling and Andrew Walch"
 date: "10/10/2017"
 output: html_document
 ---
-##Introduction##
-#Read in the files containing the Beer and the Breweries
-```{r, echo=TRUE}
-beer <- read.csv("Beers.csv", header=TRUE)
-brew <- read.csv("Breweries.csv", header=TRUE)
+#Introduction
+The purpose of this code is to take data regarding beer and breweries in the United States of America.  
+Within this code, you can find information such as:  
+* The number of breweries per state  
+* What data is missing and why this matters in the context of this data  
+* Bitterness and Alcohol content found in each state, along with comparisons
+
+Libraries used:  
+library(dplyr) for the `count` function  
+library(ggplot2) for plotting barplot (`ggplot`)
+```{r, echo=TRUE, include=FALSE}
+library(dplyr) #count function
+#bar plot
+library(ggplot2)
 ```
-#How many breweries are present in each state?
+
+##Reading in the files containing the Beer and the Breweries data in order to conduct further analysis
 ```{r, echo=TRUE}
-#install.packages("dplyr")
-library(dplyr)
-print(count(brew, brew$State)) #still need to figure out how to show all of the states and their counts, not just the 
+knitr::opts_knit$set(root.dir = '/Users/lizzysterling/Desktop/CaseStudy1')
 ```
-#Merge beer data with the breweries data.
+`beers` contains information regarding the beer data  
+`breweries` contains information regardin the breweries data
 ```{r, echo=TRUE}
-names(beer)[5]<- "Brew_ID" #making the merged columns the same
-totalbeerinfo <- merge(beer, brew, by="Brew_ID")
-names(totalbeerinfo[2]) <- "BeerName" #changing this column to BeerName
-names(totalbeerinfo[8]) <- "BreweryName"#changing this coloumn to BreweryName
-print(head(totalbeerinfo, 6))
-print(tail(totalbeerinfo, 6))
+beers <- read.csv("Beers.csv", header=TRUE)
+breweries <- read.csv("Breweries.csv", header=TRUE)
+```
+##Breweries by State
+```{r, echo=TRUE}
+count <- count(breweries, breweries$State, sort=FALSE)
+names(count)[1] <- "State"
+names(count)[2] <- "Breweries"
+count_wrap <- cbind(count[1:(nrow(count)/5), ], count[(1+(nrow(count)/5)):(10+(nrow(count)/5)), ], count[(11+(nrow(count)/5)):(20+(nrow(count)/5)),], count[(21+(nrow(count)/5)):(30+(nrow(count)/5)),], count[(31+(nrow(count)/5)):(40+(nrow(count)/5)),])
+count_wrap 
+```
+##Merge beer data with the breweries data.
+```{r, echo=TRUE}
+names(beers)[5]<- "Brew_ID" #making the merged columns the same
+Breweries_and_Beer <- merge(beers, breweries, by="Brew_ID")
+names(Breweries_and_Beer)[2] <- "BeerName" #changing name.x to BeerName
+names(Breweries_and_Beer)[8] <- "BreweryName" #changing name.y to BreweryName
+head(Breweries_and_Beer, 6)
+tail(Breweries_and_Beer, 6)
 ```
 #Report the number of NAs in each column
 ```{r, echo=TRUE}
 for (i in 1:10){
-  print(paste(names(totalbeerinfo)[i],":", sum(is.na(totalbeerinfo[,i]))))}
-#the issue with this one is that they are all separated by quotes
+  print(paste(names(Breweries_and_Beer)[i],":", sum(is.na(Breweries_and_Beer[,i]))))}
 ```
-#Compute the median alcohol content and international bitterness unit for each state.#
-Median Alcohol Content (ABV)
+##Compute the median alcohol content and international bitterness unit for each state.#
+###Median Alcohol Content (ABV)
+Utah has the least median alcohol content (4%) - this can most likely be attributed to the large population of Mormons in Utah, and Mormons do not typically drink alcohol, especially when it has a higher alcohol content  
+Kentucky and Washington DC are tied for having the highest median alcohol content (6.25%)
 ```{r, echo=TRUE}
-tapply(totalbeerinfo$ABV, totalbeerinfo$State, FUN=median, na.rm=TRUE)
+abv <- tapply(Breweries_and_Beer$ABV, Breweries_and_Beer$State, FUN=median, na.rm=TRUE)
+abv
 ```
-Median International Bitterness Unit (IBU)
+###Median International Bitterness Unit (IBU)
+Maine (ME) has the highest median of bitterness in their beer of 61  
+Wisconsin (WI) has the lowest median of bitterness in their beer of 19  
+*It is interesting to note that South Dakota apparently has no beer with any bitterness*
 ```{r, echo=TRUE}
-tapply(totalbeerinfo$IBU, totalbeerinfo$State, FUN=median, na.rm=TRUE)
+ibu <- tapply(Breweries_and_Beer$IBU, Breweries_and_Beer$State, FUN=median, na.rm=TRUE)
+ibu
 ```
 ###Plot the Differences
-
+```{r, echo=TRUE}
+states <- count[,1]
+ibu_abv <- data.frame(ibu,abv,states)
+```
 ##Comparing States
 ###State with the beer with the maximum alcohol content (ABV)
 Colorado has the beer with highest alcohol content (12.8%)
 ```{r, echo=TRUE}
-abv_clean <- na.omit(totalbeerinfo$ABV)
-max(abv_clean)
-totalbeerinfo[grep("0.128", totalbeerinfo$ABV),]
+abv_clean <- na.omit(Breweries_and_Beer$ABV)
+max(abv_clean) #gives us the max ABV, which is 0.128
+Breweries_and_Beer[grep("0.128", Breweries_and_Beer$ABV),] #finds the row with the highest alcohol content (.128)
 ```
 ###State with the beer with the maxium bitterness (IBU)
 Oregon has the beer with the highest bitterness (138)
 ```{r, echo=TRUE}
-ibu_clean <- na.omit(totalbeerinfo$IBU)
-max(ibu_clean)
-totalbeerinfo[grep("138", totalbeerinfo$IBU),]
+ibu_clean <- na.omit(Breweries_and_Beer$IBU)
+max(ibu_clean) #gives us the maximum bitterness, which is 138
+Breweries_and_Beer[grep("138", Breweries_and_Beer$IBU),] #finds the row with the highest bitterness (138)
 ```
 ##Summary Statistics for the ABV variable
 These summary statistics show that there is a large range of alcohol content, with a minimum of .1% and a maximum of 12.8%, with an average of 5.977%. 
 ```{r, echo=TRUE}
-#Getting rid of the NAs in the ABV column
-abvomit <- na.omit(totalbeerinfo$ABV)
-summary(abvomit)
+summary(abv_clean)
 ```
 ##Relationship Between IBU and ABV of beer
 The scatterplot comparing bitterness and alcohol content shows a slight pattern of the higher the alcohol content the higher the bitterness, but there are also many outliers.  
