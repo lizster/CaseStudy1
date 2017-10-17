@@ -34,9 +34,40 @@ for (i in 1:10){
 #Compute the median alcohol content and international bitterness unit for each state.#
 Median Alcohol Content (ABV)
 ```{r, echo=TRUE}
-print(tapply(totalbeerinfo$ABV, totalbeerinfo$State, FUN=median, na.rm=TRUE))
+tapply(totalbeerinfo$ABV, totalbeerinfo$State, FUN=median, na.rm=TRUE)
 ```
 Median International Bitterness Unit (IBU)
 ```{r, echo=TRUE}
-print(tapply(totalbeerinfo$IBU, totalbeerinfo$State, FUN=median, na.rm=TRUE))
+tapply(totalbeerinfo$IBU, totalbeerinfo$State, FUN=median, na.rm=TRUE)
 ```
+###Plot the Differences
+
+##Comparing States
+###State with the beer with the maximum alcohol content (ABV)
+Colorado has the beer with highest alcohol content (12.8%)
+```{r, echo=TRUE}
+abv_clean <- na.omit(totalbeerinfo$ABV)
+max(abv_clean)
+totalbeerinfo[grep("0.128", totalbeerinfo$ABV),]
+```
+###State with the beer with the maxium bitterness (IBU)
+Oregon has the beer with the highest bitterness (138)
+```{r, echo=TRUE}
+ibu_clean <- na.omit(totalbeerinfo$IBU)
+max(ibu_clean)
+totalbeerinfo[grep("138", totalbeerinfo$IBU),]
+```
+##Summary Statistics for the ABV variable
+These summary statistics show that there is a large range of alcohol content, with a minimum of .1% and a maximum of 12.8%, with an average of 5.977%. 
+```{r, echo=TRUE}
+#Getting rid of the NAs in the ABV column
+abvomit <- na.omit(totalbeerinfo$ABV)
+summary(abvomit)
+```
+##Relationship Between IBU and ABV of beer
+The scatterplot comparing bitterness and alcohol content shows a slight pattern of the higher the alcohol content the higher the bitterness, but there are also many outliers.  
+The trend of linearity does not start until after you get to 5% alcohol level.
+```{r, echo=TRUE}
+plot(abv, ibu, main="ABV vs. IBU")
+```
+
