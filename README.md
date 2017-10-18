@@ -14,7 +14,10 @@ a bar chart to compare.
 This directory contains all information regarding gathering and analyzing data regarding `beers` and `breweries`
 
 ## Distribution of Work  
-*Lizzy*: combined relevant code and output along with the answers to the seven questions to generate an RMarkdown document with a correpsonding markdown file to present the findings in a reasonable fashion.
+While we both contributed separate codes, they both come to the same conclusions, just in different ways. These differences can be found within the codebook.  
+
+*Lizzy*: combined relevant code and output along with the answers to the seven questions to generate an RMarkdown document with a correpsonding markdown file to present the findings in a reasonable fashion. (`BreweryInformation.rmd` and `BreweryInformation.md`)
+
 
 *Andrew*:
 
