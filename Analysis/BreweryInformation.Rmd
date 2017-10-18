@@ -4,11 +4,6 @@ author: "Lizzy Sterling and Andrew Walch"
 date: "10/10/2017"
 output: html_document
 ---
-<<<<<<< HEAD
-##Introduction##
-#Reading in the files containing the Beer and the Breweries data in order to conduct further analysis
-"beer" contains information regarding the beer data
-"brew" contains information regardin the breweries data
 =======
 #Introduction#  
 The purpose of this code is to take data regarding beer and breweries in the United States of America.  
@@ -25,7 +20,6 @@ library(dplyr) #count function
 #bar plot
 library(ggplot2)
 ```
-
 ##Reading in the files containing the Beer and the Breweries data in order to conduct further analysis
 ```{r, echo=TRUE}
 knitr::opts_knit$set(root.dir = '/Users/lizzysterling/Desktop/CaseStudy1')
@@ -42,28 +36,15 @@ By using the `count` function within the `dplyr` package, we are able to count t
 The state with the most breweries is Colorado (CO) with 47 breweries  
 The states tied with the least breweries are Washington DC, North Dakota (ND), South Dakota (SD), and West Virginia (WV) with 1 brewery
 ```{r, echo=TRUE}
-<<<<<<< HEAD
-#install.packages("dplyr")
-library(dplyr) #allows us to use the "count" function
-count(brew, brew$State)
-=======
 count <- count(breweries, breweries$State, sort=FALSE)
 names(count)[1] <- "State"
 names(count)[2] <- "Breweries"
 count_wrap <- cbind(count[1:(nrow(count)/5), ], count[(1+(nrow(count)/5)):(10+(nrow(count)/5)), ], count[(11+(nrow(count)/5)):(20+(nrow(count)/5)),], count[(21+(nrow(count)/5)):(30+(nrow(count)/5)),], count[(31+(nrow(count)/5)):(40+(nrow(count)/5)),])
-count_wrap 
+count_wrap #gives the data in a way that shows all of the states in a wrapped fashion
 >>>>>>> a4d2b5d70c6a201b29d485b6bbb5263c12be2de8
 ```
 ##Merge beer data with the breweries data.
 ```{r, echo=TRUE}
-<<<<<<< HEAD
-names(beer)[5]<- "Brew_ID" #making the merged columns the same
-totalbeerinfo <- merge(beer, brew, by="Brew_ID") #brew ID is the only column that they have the same
-names(totalbeerinfo[2]) <- "BeerName" #changing this column to BeerName
-names(totalbeerinfo[8]) <- "BreweryName"#changing this coloumn to BreweryName
-head(totalbeerinfo, 6)
-tail(totalbeerinfo, 6)
-=======
 names(beers)[5]<- "Brew_ID" #making the merged columns the same
 Breweries_and_Beer <- merge(beers, breweries, by="Brew_ID")
 names(Breweries_and_Beer)[2] <- "BeerName" #changing name.x to BeerName
@@ -133,19 +114,4 @@ The trend of linearity does not start until after you get to 5% alcohol level.
 ```{r, echo=TRUE}
 plot(abv, ibu, main="ABV vs. IBU")
 ```
-<<<<<<< HEAD
-#Compute the median alcohol content and international bitterness unit for each state.
-Median Alcohol Content (ABV)
-```{r, echo=TRUE}
-tapply(totalbeerinfo$ABV, totalbeerinfo$State, FUN=median, na.rm=TRUE)
-```
-Median International Bitterness Unit (IBU)
-```{r, echo=TRUE}
-tapply(totalbeerinfo$IBU, totalbeerinfo$State, FUN=median, na.rm=TRUE)
-```
-#plot the data in a barchart to compare
-
-#Summary Statistics for the ABV variable
-=======
-
 >>>>>>> a4d2b5d70c6a201b29d485b6bbb5263c12be2de8
