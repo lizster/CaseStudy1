@@ -7,14 +7,14 @@ Introduction
 ============
 
 The purpose of this code is to take data regarding beer and breweries in the United States of America.
-Within this code, you can find information such as:
-\* The number of breweries per state
-\* What data is missing and why this matters in the context of this data
-\* Bitterness and Alcohol content found in each state, along with comparissons
+Within this code, you can find information such as:  
+\* The number of breweries per state  
+\* What data is missing and why this matters in the context of this data  
+\* Bitterness and Alcohol content found in each state, along with comparissons  
 
-Libraries used:
-library(dplyr) for the `count` function
-library(ggplot2) for plotting barplot (`ggplot`)
+Libraries used:  
+library(dplyr) for the `count` function  
+library(ggplot2) for plotting barplot (`ggplot`)  
 
 Reading in the files containing the Beer and the Breweries data in order to conduct further analysis
 ----------------------------------------------------------------------------------------------------
