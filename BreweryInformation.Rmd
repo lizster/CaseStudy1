@@ -71,10 +71,19 @@ Wisconsin (WI) has the lowest median of bitterness in their beer of 19
 ibu <- tapply(Breweries_and_Beer$IBU, Breweries_and_Beer$State, FUN=median, na.rm=TRUE)
 ibu
 ```
-###Plot the Differences
+####Plot the Differences
+The barplot compares, side by side, IBU and ABV medians. When looking at ABV scores, remember that they are in percentages, while IBU is on a scale from 0-120 (roughly). It is apparent that there is greater range for IBUs, but this may be due to the fact that there is also a wide range of taste preferences when it comes to bitterness. 
 ```{r, echo=TRUE}
 states <- count[,1]
-ibu_abv <- data.frame(ibu,abv,states)
+abv_percent <- abv*100 #making these values percents so that the comparisons are easier to see on the graph
+head(abv_percent)
+medians <- data.frame(ibu,abv_percent)
+#medians
+ibu_abv <- data.frame(c(medians$ibu,medians$abv),states)
+names(ibu_abv)[1] <- "Medians"
+ibu_abv$Measure <- c(rep("IBU",length(ibu)),rep("ABV",length(abv)))
+ibu_abv
+ggplot(ibu_abv,aes(State,Medians)) + geom_bar(aes(State,Medians, fill=Measure),stat="identity",position="dodge",width=.7)+scale_fill_manual("Medians\n", values=c("red","blue"), labels=c("ABV","IBU")) + labs(x="\nStates",y="Medians\n")+ theme_bw(base_size=14) + theme(axis.text.x = element_text(angle=90,hjust=1,size=7)) + ggtitle("Comparing Medians of ABV and IBU") 
 ```
 ##Comparing States
 ###State with the beer with the maximum alcohol content (ABV)
