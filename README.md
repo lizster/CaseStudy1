@@ -1,4 +1,5 @@
-#Case Study 1
-Contains information regarding my first case study.
-#Codebook
+#Case Study 1  
+Contains information regarding my first case study.  
+##Codebook  
+
 
