@@ -229,7 +229,10 @@ ggplot(ibu_abv,aes(State,Medians)) + geom_bar(aes(State,Medians, fill=Measure),s
 
     ## Warning: Removed 1 rows containing missing values (geom_bar).
 
-![](BreweryInformation_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-11-1.png) \#\#Comparing States \#\#\#State with the beer with the maximum alcohol content (ABV) Colorado has the beer with highest alcohol content (12.8%)
+![](BreweryInformation_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-11-1.png) 
+## Comparing States  
+### State with the beer with the maximum alcohol content (ABV)  
+Colorado has the beer with highest alcohol content (12.8%)  
 
 ``` r
 abv_clean <- na.omit(Breweries_and_Beer$ABV)
