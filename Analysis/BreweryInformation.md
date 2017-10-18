@@ -34,9 +34,10 @@ breweries <- read.csv("Breweries.csv", header=TRUE)
 Breweries by State
 ------------------
 
-By using the `count` function within the `dplyr` package, we are able to count the number of breweries found in each separate state.
-The state with the most breweries is Colorado (CO) with 47 breweries
-The states tied with the least breweries are Washington DC, North Dakota (ND), South Dakota (SD), and West Virginia (WV) with 1 brewery
+By using the `count` function within the `dplyr` package, we are able to count the number of breweries found in each separate state.  
+The state with the most breweries is Colorado (CO) with 47 breweries.  
+The states tied with the least breweries are:  
+Washington DC, North Dakota (ND), South Dakota (SD), and West Virginia (WV) with 1 brewery.  
 
 ``` r
 count <- count(breweries, breweries$State, sort=FALSE)
@@ -72,8 +73,8 @@ count_wrap
 Merge beer data with the breweries data.
 ----------------------------------------
 
-By making the corresponding column names in each data set (`beer` and `brew`)the same, we can merge the data into one large data set `Breweries_and_Beer`
-In this case, the corresponding column name referenced the brewery ID, or `Brew_ID`
+By making the corresponding column names in each data set (`beer` and `brew`)the same, we can merge the data into one large data set `Breweries_and_Beer`  
+In this case, the corresponding column name referenced the brewery ID, or `Brew_ID`  
 
 ``` r
 names(beers)[5]<- "Brew_ID" #making the merged columns the same
@@ -141,7 +142,7 @@ tail(Breweries_and_Beer, 6)
 Report the number of NAs in each column
 ---------------------------------------
 
-This is a complete data set with missing values found in the `ABV` and `IBU` columns. This is to be expected because not all beer is alcoholic and not all beer has any bitterness.
+This is a complete data set with missing values found in the `ABV` and `IBU` columns. This is to be expected because not all beer is alcoholic and not all beer has any bitterness. Therefore, these lines should not be removed.
 
 ``` r
 for (i in 1:10){
@@ -164,7 +165,7 @@ Compute the median alcohol content and international bitterness unit for each st
 
 ### Median Alcohol Content (ABV) per state
 
-Utah has the least median alcohol content (4%) - this can most likely be attributed to the large population of Mormons in Utah, and Mormons do not typically drink alcohol, especially when it has a higher alcohol content
+Utah has the least median alcohol content (4%) - this can most likely be attributed to the large population of Mormons in Utah, and Mormons do not typically drink alcohol, especially when it has a higher alcohol content  
 Kentucky and Washington DC are tied for having the highest median alcohol content (6.25%)
 
 ``` r
@@ -192,8 +193,8 @@ abv
 
 ### Median International Bitterness Unit (IBU)
 
-Maine (ME) has the highest median of bitterness in their beer of 61
-Wisconsin (WI) has the lowest median of bitterness in their beer of 19
+Maine (ME) has the highest median of bitterness in their beer of 61  
+Wisconsin (WI) has the lowest median of bitterness in their beer of 19  
 *It is interesting to note that South Dakota apparently has no beer with any bitterness*
 
 ``` r
@@ -261,7 +262,7 @@ summary(abv_clean)
 Relationship Between IBU and ABV of beer
 ----------------------------------------
 
-The scatterplot comparing bitterness and alcohol content shows a slight pattern of the higher the alcohol content the higher the bitterness, but there are also many outliers.
+The scatterplot comparing bitterness and alcohol content shows a slight pattern of the higher the alcohol content the higher the bitterness, but there are also many outliers.  
 The trend of linearity does not start until after you get to 5% alcohol level.
 
 ``` r
