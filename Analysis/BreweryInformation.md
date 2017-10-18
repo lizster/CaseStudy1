@@ -23,7 +23,7 @@ Reading in the files containing the Beer and the Breweries data in order to cond
 knitr::opts_knit$set(root.dir = '/Users/lizzysterling/Desktop/CaseStudy1/Analysis/Data')
 ```
 
-`beers` contains information regarding the beer data
+`beers` contains information regarding the beer data  
 `breweries` contains information regardin the breweries data
 
 ``` r
