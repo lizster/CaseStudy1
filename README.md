@@ -19,6 +19,6 @@ While we both contributed separate codes, they both come to the same conclusions
 *Lizzy*: combined relevant code and output along with the answers to the seven questions to generate an RMarkdown document with a correpsonding markdown file to present the findings in a reasonable fashion. (`BreweryInformation.rmd` and `BreweryInformation.md`)
 
 
-*Andrew*:
+*Andrew*: Combined our codes to come up with a master mark down file for the case study codebook (Case_study_CodeBook.rmd) and creawted a combined Brewery_and_Beer_Clean excel file. I coordinated serveral different meet up time to ensure project was on track and a success.
 
 
